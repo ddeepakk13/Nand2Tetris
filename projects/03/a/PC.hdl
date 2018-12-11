@@ -16,5 +16,12 @@ CHIP PC {
     OUT out[16];
 
     PARTS:
-    // Put your code here:
+    Or(a=reset,b=inc,out=tor1);
+    Or(a=tor1,b=load,out=tor2);
+
+    Mux8Way16(a=in,b=sum,c=in,d=in,sel[0]=inc,sel[1]=load,sel[2]=reset,out=tmux);
+
+    Inc16(in=out1,out=sum);
+
+    Register(in=tmux,load=tor2,out=out,out=out1);
 }
